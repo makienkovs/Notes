@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="content" translatable="false">content</string>
+    <string name="time" translatable="false">time</string>
+    <string name="add">Add new note</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="mark">Mark</string>
+    <string name="ok" translatable="false">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="update">Up to date</string>
+    <string name="keep">Keep date</string>
+    <string name="sure">Are you sure?</string>
+    <string name="share">Share</string>
+    <string name="shareNote">Share note</string>
+    <string name="choose">Choose the note</string>
+</resources>
