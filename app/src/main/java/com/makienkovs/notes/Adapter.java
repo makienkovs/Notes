@@ -3,7 +3,7 @@ package com.makienkovs.notes;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.graphics.Paint;
+import android.text.Html;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +63,11 @@ public class Adapter extends BaseAdapter {
         return convertView;
     }
 
+    void nullNote() {
+        if (note == null) return;
+        note.setSelected(false);
+        note = null; }
+
     Note getNote() {
         return note;
     }
@@ -71,19 +76,21 @@ public class Adapter extends BaseAdapter {
         final Note n = (Note) getItem(position);
         TextView content = v.findViewById(R.id.content);
         TextView time = v.findViewById(R.id.time);
+        String timeString = (String) DateFormat.format("dd.MM.yyyy, HH.mm.ss", n.getTime());
 
         if (n.getContent() == null)
             content.setText("");
+        else if (n.isCancel())
+            content.setText(Html.fromHtml("<s>" + n.getContent() + "</s>", Html.FROM_HTML_MODE_LEGACY));
         else
             content.setText(n.getContent());
 
-        if (n.isCancel()) {
-            content.setPaintFlags(content.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            time.setPaintFlags(time.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        } else {
-            content.setPaintFlags(content.getPaintFlags() | Paint.LINEAR_TEXT_FLAG);
-            time.setPaintFlags(time.getPaintFlags() | Paint.LINEAR_TEXT_FLAG);
-        }
+        if (n.getTime() == 0)
+            time.setText("");
+        else if (n.isCancel())
+            time.setText(Html.fromHtml("<s>" + timeString + "</s>", Html.FROM_HTML_MODE_LEGACY));
+        else
+            time.setText(timeString);
 
         if (n.isSelected() && n.isDone()) {
             v.setBackgroundColor(Color.rgb(216, 191, 93));
@@ -94,10 +101,5 @@ public class Adapter extends BaseAdapter {
         } else {
             v.setBackgroundColor(Color.TRANSPARENT);
         }
-
-        if (n.getTime() == 0)
-            time.setText("");
-        else
-            time.setText(DateFormat.format("dd.MM.yyyy, HH.mm.ss", n.getTime()));
     }
 }

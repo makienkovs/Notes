@@ -82,18 +82,24 @@ public class MainActivity extends AppCompatActivity {
                     addNewNote();
                     break;
                 case R.id.edit:
+                    assert n != null;
                     editNote(n);
                     break;
                 case R.id.delete:
+                    assert n != null;
                     deleteNote(n);
+                    adapter.nullNote();
                     break;
                 case R.id.cancel:
+                    assert n != null;
                     cancelNote(n);
                     break;
                 case R.id.mark:
+                    assert n != null;
                     markNote(n);
                     break;
                 case R.id.share:
+                    assert n != null;
                     shareNote(n);
                     break;
                 default:
